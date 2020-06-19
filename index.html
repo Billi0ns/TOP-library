@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+    <header class="header container-fluid">
+        <div class="d-flex justify-content-center">Library</div>
+    </header>
+
+    <div class="container-fluid">
+        <main class="row cards">
+            <div class="col-md-5 d-flex justify-content-center" id="1">
+                <div class="card book">
+                    <div class="book__title">
+                        <span class="card__title">Title:</span>
+                        <span class="book__title--text">The Martian</span>
+                    </div>
+                    <div class="book__author">
+                        <span class="card__title">Author:</span>
+                        <span class="book__author--text">Andy Weir</span>
+                    </div>
+                    <div class="book__pages">
+                        <span class="card__title">Number of Pages:</span>
+                        <span class="book__pages--text">369</span>
+                    </div>
+                    <div class="book__readStatus">
+                        <span class="card__title">Book Read:</span>
+                        <span class="book__readStatus--text" id="ST1">Yes</span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-2">
+                        <button class="btn btn-danger mx-auto deleteCard" data-key="1" onclick="deleteCard(this)">Delete</button>
+                        <button class="btn btn-primary mx-auto changeStatus" data-key='ST1' onclick="changeStatus(this)">Change</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 d-flex justify-content-center" id="2">
+                <div class="card book">
+                    <div class="book__title">
+                        <span class="card__title">Title:</span>
+                        <span class="book__title--text">Freakonomics</span>
+                    </div>
+                    <div class="book__author">
+                        <span class="card__title">Author:</span>
+                        <span class="book__author--text">Steven D. Levitt</span>
+                    </div>
+                    <div class="book__pages">
+                        <span class="card__title">Number of Pages:</span>
+                        <span class="book__pages--text">320</span>
+                    </div>
+                    <div class="book__readStatus">
+                        <span class="card__title">Book Read:</span>
+                        <span class="book__readStatus--text" id="ST2">No</span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-2">
+                        <button class="btn btn-danger mx-auto deleteCard" data-key="2" onclick="deleteCard(this)">Delete</button>
+                        <button class="btn btn-primary mx-auto changeStatus" data-key='ST2' onclick="changeStatus(this)">Change</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <div class="mb-5"></div>
+    </div>
+
+    <div class="bgFilter">
+
+        <div class="container-fluid justify-content-center addBookForm">
+            <div class="card">
+                <div class="container-fluid">
+                    <div class="addBookForm__close" onclick="closeForm()">
+                       X
+                    </div>
+                    <form>
+                        <div class="form-group">
+                            <label for="" class="mt-2">Book Title:</label>
+                            <input type="text" class="form-control inputTitle">
+                            <label for="" class="mt-2">Author:</label>
+                            <input type="text" class="form-control inputAuthor">
+                            <label for="" class="mt-2">Number of Pages:</label>
+                            <input type="number" class="form-control inputPages">
+    
+                            <div class="mt-2">Did you read it?</div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="inputReadStatus" id="inlineRadio1" value="Yes">
+                              <label class="form-check-label" for="inlineRadio1">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="inputReadStatus" id="inlineRadio2" value="No">
+                              <label class="form-check-label" for="inlineRadio2">No</label>
+                            </div>
+    
+                            <div class="mt-3 d-flex justify-content-center">
+                                <button class="btn addBookForm__submit" onclick="submitForm()" style="background-color: #4caf50d4; color: white;">Add</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer d-flex container-fluid">
+        <button class="mx-auto btn btn-dark addBookForm__open" onclick="openForm()">Add book</button>
+    </footer>
+
+    
+    <script src="./app.js"></script>
+</body>
+</html>
