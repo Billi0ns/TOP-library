@@ -1,4 +1,4 @@
-# TOP Library Clone
+# TOP Library 
 > Practice Project for The Odin Project
 
 Main goal is to practice javascript
