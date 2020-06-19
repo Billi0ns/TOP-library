@@ -1,9 +1,18 @@
-function book(title, author, pages, readStatus) {
+if(!localStorage.myLibrary) {
+  localStorage.setItem('myLibrary', JSON.stringify([
+    new book("The Martian", "Andy Weir", "369", "Yes", "theMartian"),
+    new book("Freakonomics", "Steven D. Levitt", "320", "No", "Freakonomics"),
+  ]))
+}
+
+let myLibrary = JSON.parse(localStorage.getItem('myLibrary'));
+
+function book(title, author, pages, readStatus, id=Date.now()) {
   this.title = title,
   this.author = author,
   this.pages = pages,
-  this.readStatus = readStatus
-  this.id = Date.now();
+  this.readStatus = readStatus,
+  this.id = String(id)
 }
 
 const bookTitle = document.querySelector('.book__title--text');
@@ -30,6 +39,9 @@ function submitForm(){
   }
 
   let newBook = new book(inputTitle.value, inputAuthor.value, inputPages.value, inputReadStatus);
+  
+  myLibrary.push(newBook);
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
   renderBook(newBook);
   closeForm();
 }
@@ -55,20 +67,34 @@ function closeForm() {
 function deleteCard(target) {
   let id = target.dataset.key;
   document.getElementById(id).remove();
+
+  myLibrary.splice(myLibrary.findIndex(book => {
+    return book.id === id;
+  }), 1)
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 }
 
 function changeStatus(target) {
   let id = target.dataset.key;
-  let elem = document.getElementById(id);
+  let book = myLibrary[myLibrary.findIndex(item => item.id === id)];
+  let elem = document.getElementById(`ST${id}`);
 
-  if(elem.textContent === 'Yes') {
+  if(book.readStatus === 'Yes') {
+    book.readStatus = 'No';
     elem.textContent = 'No';
   } else {
+    book.readStatus = 'Yes';
     elem.textContent = 'Yes';
   }
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 }
 
-/* Render new book */
+/* Initialize Page */
+function initPage() {
+  myLibrary.map(book => renderBook(book))
+}
+
+/* Render Book */
 function renderBook(book) {
   let cards = document.querySelector('.cards');
 
@@ -93,9 +119,11 @@ function renderBook(book) {
           </div>
           <div class="d-flex justify-content-center mt-2">
               <button class="btn btn-danger mx-auto deleteCard" data-key="${book.id}" onclick="deleteCard(this)">Delete</button>
-              <button class="btn btn-primary mx-auto changeStatus" data-key="ST${book.id}" onclick="changeStatus(this)">Change</button>
+              <button class="btn btn-primary mx-auto changeStatus" data-key="${book.id}" onclick="changeStatus(this)">Change</button>
           </div>
       </div>
   </div>
   `);
 }
+
+initPage();
