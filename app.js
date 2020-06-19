@@ -56,9 +56,8 @@ function closeForm() {
   inputAuthor.value = '';
   inputPages.value = '';
   
-  if (document.querySelector('input[name="inputReadStatus"]:checked')) {
-    document.querySelector('input[name="inputReadStatus"]:checked').checked = false;
-  }
+  document.querySelector('input[id="inlineRadio2"]').checked = false;
+  document.querySelector('input[id="inlineRadio1"]').checked = true;
 
   addBookForm.style.display = 'none';
   bgFilter.style.display = 'none';
